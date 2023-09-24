@@ -1,28 +1,64 @@
-![example branch parameter](https://github.com/github/docs/actions/workflows/main.yml/badge.svg?event=push)
+[![.github/workflows/main.yml](https://github.com/zaylyalow/kittygram_final/actions/workflows/main.yml/badge.svg)](https://github.com/zaylyalow/kittygram_final/actions/workflows/main.yml)
 
-#  Как работать с репозиторием финального задания
+#  Kittygram
 
-## Что нужно сделать
+## О проекте
 
-Настроить запуск проекта Kittygram в контейнерах и CI/CD с помощью GitHub Actions
+В данном проекте реализована мини соцсеть для владельцев кошек, в которой можно делиться фотками котиков и их достижениями
 
-## Как проверить работу с помощью автотестов
+## Технологии
+Python 3.9, Django 4.1, Django REST framework, React, Docker, Nginx
 
-В корне репозитория создайте файл tests.yml со следующим содержимым:
-```yaml
-repo_owner: ваш_логин_на_гитхабе
-kittygram_domain: полная ссылка (https://доменное_имя) на ваш проект Kittygram
-taski_domain: полная ссылка (https://доменное_имя) на ваш проект Taski
-dockerhub_username: ваш_логин_на_докерхабе
+## Запуск проекта на локальном компьютере
+
+Для запуска проекта необходимо иметь на установленные: node.js, python, pip.
+
+клонировать проект:
+https://github.com/zaylyalow/kittygram_final.git
+frontend:
+cd frontend
+npm i
+rpm run dev
+
+backend:
+cd backend
+python -m venv venv
+
+# Linux/macOS:
 ```
+  source env/bin/activate
+  ```
+# windows:
+  ```
+  source venv/Scripts/activate
+  ```
 
-Скопируйте содержимое файла `.github/workflows/main.yml` в файл `kittygram_workflow.yml` в корневой директории проекта.
+```
+pip install -r requirements.txt
+```
+```
+python manage.py migrate
+```
+```
+python manage.py runserver
+```
+При успешном старте получим backend приложение на 127.0.0.1:9000
 
-Для локального запуска тестов создайте виртуальное окружение, установите в него зависимости из backend/requirements.txt и запустите в корневой директории проекта `pytest`.
+## Альтернативная установка возможна при налиичи на локальом компьютере Docer compose
 
-## Чек-лист для проверки перед отправкой задания
+Запустите проект из корня с помощью команды:
+```
+docker compose up
+```
+Соберите статику Django с помощью команды:
+```
+docker compose exec backend python manage.py collectstatic
+```
+Скопируйте статику командой:
+```
+docker compose exec backend cp -r /app/collected_static/. /static/static/
+```
+По адресу http://127.0.0.1:9000/ сайт будет доступен.
 
-- Проект Taski доступен по доменному имени, указанному в `tests.yml`.
-- Проект Kittygram доступен по доменному имени, указанному в `tests.yml`.
-- Пуш в ветку main запускает тестирование и деплой Kittygram, а после успешного деплоя вам приходит сообщение в телеграм.
-- В корне проекта есть файл `kittygram_workflow.yml`.
+
+### Автор проекта Зайлялов Шамиль
