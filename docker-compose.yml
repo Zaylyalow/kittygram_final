@@ -1,5 +1,3 @@
-version: '3'
-
 volumes:
   pg_kitty_data:
   static:

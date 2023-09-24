@@ -17,6 +17,8 @@ services:
     volumes:
       - static_volume:/backend_static
       - media_volume:/app/media/cats/images/
+    depends_on:
+      - db
   frontend:
     image: zaylyalow/kittygram_frontend
     env_file: .env
@@ -31,3 +33,5 @@ services:
       - media_volume:/media/cats/images/
     ports:
       - 9000:80
+    depends_on:
+      - backend
