@@ -32,7 +32,7 @@ jobs:
         pip install -r ./backend/requirements.txt 
     - name: Test with flake8 and django tests
       env:
-        SECRET_KEY: 'SECRET_KEY'
+        # SECRET_KEY: 'SECRET_KEY'
         POSTGRES_USER: kittygram_user
         POSTGRES_PASSWORD: kittygram_password
         POSTGRES_DB: kittygram
